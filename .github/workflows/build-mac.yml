@@ -1,0 +1,28 @@
+name: Build Mac App
+on: [push]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install PyQt5 pynput keyboard pyinstaller
+
+      - name: Build with PyInstaller
+        run: |
+          # Kiểm tra: Nếu file của ông tên là vamnhatvn.py thì sửa dòng dưới cho đúng nhé
+          pyinstaller --noconsole --onefile --add-data "asset_waguri:asset_waguri" --add-data "asset_chad:asset_chad" bongo_maker.py
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Vam-Keyboard-Mac-App
+          path: dist/bongo_maker
