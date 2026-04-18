@@ -18,11 +18,15 @@ jobs:
 
       - name: Build with PyInstaller
         run: |
-          # Kiểm tra: Nếu file của ông tên là bongo_maker.py thì sửa dòng dưới cho đúng nhé
-          pyinstaller --noconsole --onefile --add-data "asset_waguri:asset_waguri" --add-data "asset_chad:asset_chad" bongo_maker.py
+          # Lệnh này sẽ tự tìm file .py nếu ông đặt tên khác bongo_maker.py
+          # Và nó sẽ chấp nhận cả folder có dấu cách hoặc gạch dưới
+          pyinstaller --noconsole --onefile \
+          --add-data "asset_waguri*:asset_waguri" \
+          --add-data "asset_chad*:asset_chad" \
+          *.py
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: Vam-Keyboard-Mac-App
-          path: dist/bongo_maker
+          path: dist/*
