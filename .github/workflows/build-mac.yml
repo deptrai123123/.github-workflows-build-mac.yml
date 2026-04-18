@@ -18,7 +18,7 @@ jobs:
 
       - name: Build with PyInstaller
         run: |
-          # Kiểm tra: Nếu file của ông tên là vamnhatvn.py thì sửa dòng dưới cho đúng nhé
+          # Kiểm tra: Nếu file của ông tên là bongo_maker.py thì sửa dòng dưới cho đúng nhé
           pyinstaller --noconsole --onefile --add-data "asset_waguri:asset_waguri" --add-data "asset_chad:asset_chad" bongo_maker.py
 
       - name: Upload Artifact
